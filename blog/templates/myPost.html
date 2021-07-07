@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block mainContent %}
+
+<!-- 새글 쓰기 기능을 실행할 수 있는 버튼 -->
+<div class="my-post-align">
+    <button type="button" class="btn btn-primary"
+        style="background-color:pink; border: None; float: right; margin:50px 50px 100px 0" data-bs-toggle="modal"
+        data-bs-target="#exampleModal" data-bs-whatever="@mdo">새글 쓰기</button>
+</div>
+
+<!-- 누르면 모달(팝업창) 나옴 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">무슨 글을 써볼까요?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                <!-- 실질적으로 데이터를 입력받아서 처리 할 수 있는 부분 -->
+                <form method = "post" action = "{% url 'new' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">제목</label>
+                        <input type="text" class="form-control" id="recipient-name" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">내용</label>
+                        <!-- 인풋과 라벨에서 내용을 받음 -->
+                        <textarea class="form-control" id="message-text" name = "body"></textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="inputGroupFile02" name="image">
+                        
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                    </div>
+                    <div class="modal-footer">
+                                <input class="btn btn-primary" style="background-color:pink; border: None;" type = "submit" value = "완료">
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 여기가지가 모달 -->
+
+
+
+
+<!-- 올릴게 아무것도 없을때 띄울 내용 -->
+{% if post_list|length == 0 %}
+<div id="qlogo">
+    <div class="poziomq">
+        <figure class="liscie">
+            <span class="lisc-lewy"><span class="after"></span></span>
+            <span class="lisc-lewy drugi"><span class="after"></span></span>
+            <span class="lisc-prawy"><span class="after"></span></span>
+            <span class="lisc-prawy drugi"><span class="after"></span></span>
+            <span class="lodyga"></span>
+        </figure>
+        <figure class="rece">
+            <span class="reka reka-lewa"></span>
+            <span class="reka reka-prawa"></span>
+        </figure>
+        <figure class="cialo">
+            <span class="twarz">
+                <span class="oczy">
+                    <span class="oko oko-lewe"></span>
+                    <span class="oko oko-prawe"></span>
+                </span>
+                <span class="piegi">
+                    <span class="pieg pieg-lewy"></span>
+                    <span class="pieg pieg-prawy"></span>
+                </span>
+                <span class="buzia">
+                    <span class="gardlo"></span>
+                    <span class="zuby"></span>
+                </span>
+            </span>
+        </figure>
+        <figure class="nogi">
+            <span class="noga-lewa"></span>
+            <span class="noga-prawa"></span>
+        </figure>
+    </div>
+
+    <figure class="cien"></figure>
+    <figure class="tekst"> 글이 없어요 ㅠㅠ</figure>
+</div>
+{% endif %}
+<!-- 글이 없을때 띄울 니용 끝(탬플릿 언어로 if문 구현) -->
+
+
+<!-- 실제 데이터들을 for구문으로 보여주자 -->
+<div class="band">
+    <!-- post_list에 아까 올린 블로그 글 두개가 리스트 형태로 있음 -->
+    {% for post in post_list %}
+    <div class="item-2">
+        <a href="{% url 'post-detail' post.id %}" class="card">            
+            
+            <!-- 이미지가 없을때 케이스 나눠놓기 -->
+            {% if post.image %}
+            <div class="thumb"
+                style="background-image: url({{ post.image.url }})">
+
+            </div>
+            {% else %}
+            <div class="thumb"
+                style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-5.jpg);">
+            </div>
+            {% endif %}
+            <article>
+                <h1>{{post.title}}</h1>
+                <p>{{post.body}}</p>
+                <span>{{post.datetime}}</span>
+            </article>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

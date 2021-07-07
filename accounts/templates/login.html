@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block mainContent %}
+
+{% if errors %}
+<div class="alert alert-danger">
+    <p>사용자 이름과 비밀번호가 맞지 않습니다. 다시 시도해주세요.</p>
+</div>
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <!-- 이곳에 로그인 카드를 구현해주세요. -->
+                    <h5 class="card-title text-center">
+                        로그인
+                    </h5>
+                    <form method="post" action="{% url 'login' %}" class="form-signin">
+                        {% csrf_token %}
+                        <div class="form-label-group">
+                            <input type="text" name="username" id="usernamed" class="form-control" placeholder="username" 
+                            required autofocus value="{{ form.username.value|default_if_none:'' }}">
+                        </div>
+                        <div class="form-label-group">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="password" 
+                            required>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" id="remberName">
+                            <label class="rememberName-control-label" for="rememberName">
+                                <span>
+                                    회원 이름 기억하기
+                                </span>
+                            </label>
+                        </div>
+                        <div>
+                            <span>회원이 아니라면 <a href="{% url 'signup' %}">계정 생성하기</a></span>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" value="login" type="submit">로그인</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

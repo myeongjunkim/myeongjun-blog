@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'Sucrose Bold Two';
+    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/sucrose.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'IM Fell French Canon Pro';
+    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/im-fell-french-canon-pro.woff2') format('woff2');
+}
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    /* background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/mountain-range.jpg) no-repeat; */
+    background: url(../image/mainBackground.png) no-repeat;
+    margin-left: 0%;
+    padding-top: 38.93333333%;
+    /* padding-left: 40%; */
+    background-size: contain;
+    font-family: 'Sucrose Bold Two';
+}
+.header img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+}
+.header h1 {
+    position: fixed;
+    top: 5rem;
+    right: 4rem;
+    font-size: 9vw;
+    line-height: 0.8;
+    margin-top: 0;
+    text-align: center;
+}
+.header h1 span {
+    display: block;
+    font-size: 8.75vw;
+}
+main{
+    background: #fff;
+    position: relative;
+    border: 1px solid #fff;
+    font-family: 'IM Fell French Canon Pro';
+    font-size: 1.4rem;
+    padding: 2rem 25%;
+    line-height: 1.6;
+}
+@media all and (max-width: 400px) {
+    main {
+        padding: 2rem;
+   }
+   .post-header {
+       padding: 2rem;
+   }
+}
+
+hr {
+    width: 100%;
+    border: 2px solid gray;
+}
+
+.post-header {
+    background: #fff;
+    position: relative;
+    padding: 3rem 5%;
+    font-family: 'Sucrose Bold Two';
+    font-size: 2.7rem;
+}
+
+.point-color {
+    color : pink;
+}
