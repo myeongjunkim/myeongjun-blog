@@ -14,11 +14,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-d-m@&_wc7xqb@yjhj19ah9q19*wh7+-h!9^(r6m)i*%udntm+5')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuappcom']
+ALLOWED_HOSTS = ['127.0.0.1', '.heroku.app.com']
 
-ALLOWED_HOSTS = []
 
 
 DEFAULT_APPS = [
